@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const uploadmiddleware = multer({dest:'uploads/'});
 const Hero = require('../models/Hero');
+const bcrypt = require('bcrypt');
+const jwt= require('jsonwebtoken');
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -32,6 +35,42 @@ app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
 });
 
+//register function
+app.post(''/*register form name */, async(req,res)=>{
+    const {username,password} =req.body;
+    try{
+        const userDoc= await User.create({
+        username,
+        password,
+        });
+        res.json(userDoc);
+    }
+    catch(e){
+        res.status(400).json(e);
+    }
+});
+
+//login function
+app.post(''/*login form name */, async (req,res) => {
+    const {username,password} = req.body;
+    const userDoc = await User.findOne({username});
+    const pk = bcrypt.compareSync(password,userDoc.password);
+    if(pk){
+        //logged in
+        jwt.sign({username, id:userDoc._id}, tokensalt, {}, (err,token) =>{         //assigning a token to the user if logged in
+            if(err) throw err;
+            res.cookie('token', token).json({
+                id:userDoc._id,
+                username,
+            });
+        });
+    }
+    else{
+        res.status(400).json('wrong credentials');
+    }
+})
+
+
 // profile image uploading
 app.post(''/*the page from where the file is to be uploaded-fronted*/,uploadmiddleware.single(''/*the fieldname in the form */), async (req,res) =>{
     const {originalname,path} = req.file;
@@ -42,7 +81,7 @@ app.post(''/*the page from where the file is to be uploaded-fronted*/,uploadmidd
 
         const postDoc = await Hero.create({
             //require the data in form and assign it here to store in the database
-            profilePicUrl=newPath;
+            profilePicUrl=newPath,
         });
         res.json(postDoc);
 });
