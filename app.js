@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const uploadmiddleware = multer({dest:'uploads/'});
 const Hero = require('../models/Hero');
 
 const app = express();
@@ -29,4 +30,19 @@ app.use('/api/contact', contactRouter);
 // Start server
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
+});
+
+// profile image uploading
+app.post(''/*the page from where the file is to be uploaded-fronted*/,uploadmiddleware.single(''/*the fieldname in the form */), async (req,res) =>{
+    const {originalname,path} = req.file;
+    const part = originalname.split('.');
+    const ext = part[part.length - 1];
+    const newPath = path+'.'+ext;
+    fs.renameSync(path, newPath);
+
+        const postDoc = await Hero.create({
+            //require the data in form and assign it here to store in the database
+            profilePicUrl=newPath;
+        });
+        res.json(postDoc);
 });
