@@ -81,7 +81,7 @@ app.post(''/*the page from where the file is to be uploaded-fronted*/,uploadmidd
 
         const postDoc = await Hero.create({
             //require the data in form and assign it here to store in the database
-            profilePicUrl=newPath,
+            profilePicUrl:newPath,
         });
         res.json(postDoc);
 });
