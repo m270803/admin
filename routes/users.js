@@ -86,5 +86,6 @@ router.post('/login',[
       res.status(500).send("Some error occurred");
     }
   });
+  
 
 module.exports=router

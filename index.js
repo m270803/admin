@@ -13,7 +13,13 @@ app.get('/', (req, res) => {
 app.use(express.json())     // this is added so that we can use json file as a response 
 app.use(cors())
 
-app.use('/api/user',require('./routes/users')) 
+app.use('/api/user',require('./routes/users'))
+app.use('/api/hero',require('./routes/Hero'))
+app.use('/api/work',require('./routes/Work'))
+app.use('/api/services',require('./routes/Services'))
+app.use('/api/testimonials',require('./routes/Testimonials'))
+app.use('/api/about',require('./routes/About'))
+app.use('/api/contact',require('./routes/Contact'))
 // app.use('/api/user',require('./routes/register'))              
 
 app.listen(port, () => {
