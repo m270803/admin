@@ -20,6 +20,7 @@ app.use('/api/services',require('./routes/Services'))
 app.use('/api/testimonials',require('./routes/Testimonials'))
 app.use('/api/about',require('./routes/About'))
 app.use('/api/contact',require('./routes/Contact'))
+app.use('/api/resume',require('./routes/Resume'))
 // app.use('/api/user',require('./routes/register'))              
 
 app.listen(port, () => {
