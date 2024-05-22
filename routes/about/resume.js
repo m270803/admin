@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const router=express.Router();
-const Resume=require('../models/resume');
+const Resume=require('../../models/resume');
 // Multer configuration
 const upload = multer();
 
