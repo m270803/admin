@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const Services=require('../models/Services');
+const Services=require('../../models/Services');
 
 router.post('/', async (req,res) =>{
         const {description,services}=req.body;

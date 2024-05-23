@@ -14,7 +14,10 @@ app.use(express.json())     // this is added so that we can use json file as a r
 app.use(cors())
 
 app.use('/api/user',require('./routes/users'))
-app.use('/api/hero',require('./routes/Hero'))
+app.use('/api/hero/firstname',require('./routes/hero/firstname'))
+app.use('/api/hero/lastname',require('./routes/hero/lastname'))
+app.use('/api/hero/introduction',require('./routes/hero/introduction'))
+app.use('/api/hero/profilepic',require('./routes/hero/profilepic'))
 app.use('/api/work',require('./routes/Work'))
 app.use('/api/services',require('./routes/Services'))
 app.use('/api/testimonials',require('./routes/Testimonials'))

@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const Hero=require('../models/Hero');
+const Hero=require('../../models/Hero');
 const multer=require('multer');
 const uploadmiddleware = multer({dest:'uploads/'});
 const fs = require('fs');

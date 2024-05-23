@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const Work=require('../models/Work');
+const Work=require('../../models/Work');
 
 router.post('/', async (req,res) =>{
         const {projects}=req.body;
